@@ -65,7 +65,7 @@ function! s:source.hooks.on_init(args, context) abort "{{{
   let targets = split(target, "\n")
   if target ==# '%' || target ==# '#'
     let targets = [bufname(target)]
-  elseif target ==# '$buffers'
+  elseif target ==# '%buffers'
     let targets = map(filter(range(1, bufnr('$')),
           \ 'buflisted(v:val) && filereadable(bufname(v:val))'),
           \ 'bufname(v:val)')
@@ -248,7 +248,7 @@ function! s:source.async_gather_candidates(args, context) abort "{{{
 endfunction "}}}
 
 function! s:source.complete(args, context, arglead, cmdline, cursorpos) abort "{{{
-  return ['%', '#', '$buffers'] + unite#sources#file#complete_directory(
+  return ['%', '#', '%buffers'] + unite#sources#file#complete_directory(
         \ a:args, a:context, a:arglead, a:cmdline, a:cursorpos)
 endfunction"}}}
 
