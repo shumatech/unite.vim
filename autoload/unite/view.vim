@@ -805,10 +805,12 @@ function! unite#view#_redraw_echo(expr) abort "{{{
   let more_save = &more
   let showcmd_save = &showcmd
   let ruler_save = &ruler
+  let tabstop_save = &tabstop
   try
     set nomore
     set noshowcmd
     set noruler
+    set tabstop=8
 
     let msg = map(s:msg2list(a:expr), "unite#util#truncate_smart(
           \ v:val, &columns - 1 + len(v:val) - strdisplaywidth(v:val),
@@ -822,6 +824,7 @@ function! unite#view#_redraw_echo(expr) abort "{{{
     let &more = more_save
     let &showcmd = showcmd_save
     let &ruler = ruler_save
+    let &tabstop = tabstop_save
   endtry
 endfunction"}}}
 
